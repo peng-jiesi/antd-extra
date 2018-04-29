@@ -5,8 +5,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, Col, Form, Icon} from 'antd';
-import isFunction from 'lodash/isfunction';
-import isArray from 'lodash/isarray';
+import isFunction from 'lodash/isFunction';
+import isArray from 'lodash/isArray';
 import styles from './SearchForm.less';
 import FormLayout from './FormLayout';
 
@@ -56,6 +56,7 @@ class SearchForm extends React.PureComponent {
 
   handleReset() {
     this.form.resetFields();
+    this.handleSearch();
   }
 
   toggle() {
