@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {Button} from 'antd';
-import styles from './Button.less';
 
 export default class LinkButton extends PureComponent {
   static defaultProps = {};
@@ -14,7 +13,7 @@ export default class LinkButton extends PureComponent {
   render() {
     const { confirm, okText, cancelText } = this.props;
     return (
-      <Button ghost size="small" type="primary" className={styles.linkButton} {...this.props}>
+      <Button ghost size="small" type="primary" className='antd-x-link-button' {...this.props}>
         {this.props.children}
       </Button>
     );

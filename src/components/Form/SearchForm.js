@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import {Button, Col, Form, Icon} from 'antd';
 import isFunction from 'lodash/isFunction';
 import isArray from 'lodash/isArray';
-import styles from './SearchForm.less';
 import FormLayout from './FormLayout';
 
 class SearchForm extends React.PureComponent {
@@ -107,7 +106,7 @@ class SearchForm extends React.PureComponent {
     const { expand } = this.state;
     const { queryText, resetText } = this.props;
     return (
-      <Form className={styles.searchForm}>
+      <Form className='antd-x-search-form'>
         <FormLayout form={this.form}>
           {this.renderItems()}
           <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
