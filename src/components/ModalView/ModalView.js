@@ -1,16 +1,24 @@
 import * as ReactDOM from 'react-dom';
-import { Modal } from 'antd';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import {Modal} from 'antd';
+import React, {Component, createElement} from 'react';
 
-// import styles from './index.less';
-import store from '../../../index';
-
-const IS_REACT_16 = !!ReactDOM.createPortal;
+const defultConfig = {
+  width: '860px',
+  title: 'Modal'
+}
 
 export default class ModalView extends Component {
+  static app = undefined;
+
+  static bindApp(app) {
+    ModalView.app = app;
+  }
+
   static open(content, config = {}) {
-    console.log(content, config);
+    if (!ModalView.app) {
+      throw new Error('Please ModalView.bindApp(app); in dva index.js');
+    }
+
     const div = document.createElement('div');
     document.body.appendChild(div);
 
@@ -40,29 +48,19 @@ export default class ModalView extends Component {
       ReactDOM.render(<ModalView {...props} />, div);
     }
 
-    const title = config.title || 'Modal';
-    const { onOk } = config;
-
-    render({ ...config, title, content, footer:null, visible: true, onCancel, onOk });
+    const contenInst = createElement(content, { store: ModalView.app._store, modalRef: { close: onCancel } })
+    // const contenInst = <ModelComponent store={ModalView.app._store} modalRef={{ close: onCancel }} />;
+    render({ ...defultConfig, ...config, content: contenInst, footer: null, visible: true, onCancel });
     return {
       destroy: onCancel,
       close: onCancel,
     };
   }
 
-  getChildContext() {
-    return {
-      store,
-    };
-  }
 
   render() {
     return (
-      <Modal className='antd-x-content-modal' {...this.props} >{this.props.content}</Modal>
+      <Modal className="antd-x-content-modal" {...this.props} >{this.props.content}</Modal>
     );
   }
 }
-
-ModalView.childContextTypes = {
-  store: PropTypes.any,
-};

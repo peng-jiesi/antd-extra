@@ -13,9 +13,10 @@ import FormLayout from './components/Form/FormLayout';
 import SearchForm from './components/Form/SearchForm';
 import FormField from './components/Form/FormField';
 
-
 import PageTitle from './layouts/Page/PageTitle';
+import ModalFooter from './components/ModalView/ModalFooter';
+import ModalView from './components/ModalView/ModalView';
 import './index.less';
 
 
-export {DetailView, AttributeLabel, LinkButton, FormLayout, SearchForm, FormField, PageTitle};
+export {DetailView, AttributeLabel, LinkButton, FormLayout, SearchForm, FormField, PageTitle, ModalFooter, ModalView};

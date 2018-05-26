@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'dva';
 import {Form, Input} from 'antd';
 import {FormField, FormLayout, SearchForm} from "../../src";
@@ -44,7 +44,6 @@ export default class FormExt extends React.Component {
   }
 
   render() {
-
     const { form } = this.props;
 
     return (
@@ -61,6 +60,13 @@ export default class FormExt extends React.Component {
 
         <Form>
           <FormLayout form={form} cols={3}>
+            <FormField
+              label={"Test Label"}
+              name={"test"}
+              required
+            >
+              <Input/>
+            </FormField>
             {this.renderItem2()}
           </FormLayout>
         </Form>
@@ -85,21 +91,24 @@ export default class FormExt extends React.Component {
         </Form>
 
         <Form>
-          <FormLayout form={form} compact={true}>
-            <FormField
-              label={"Test Label"}
-              name={"test"}
-              required
-            >
-              <Input/>
-            </FormField>
-            <FormField
-              label={"Test Label2"}
-              name={"test2"}
-              required
-            >
-              <Input/>
-            </FormField>
+          <FormLayout form={form} compact={true} cols={4}>
+            <Fragment>
+              <FormField
+                label={"Test Label1111111111111"}
+                name={"test"}
+                required
+              >
+                <Input/>
+              </FormField>
+              <FormField
+                label={"Test Label21111111111111"}
+                name={"test2"}
+                required
+              >
+                <Input/>
+              </FormField>
+
+            </Fragment>
           </FormLayout>
         </Form>
       </div>

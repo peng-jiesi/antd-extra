@@ -3,8 +3,8 @@
  * FormField
  * Created by pengj on 2018-4-29.
  */
-import React, { Component } from 'react';
-import { Col, Form, Row } from 'antd';
+import React, {Component} from 'react';
+import {Col, Form, Row} from 'antd';
 import PropTypes from 'prop-types';
 
 const DefaultModelFormLayout = {
@@ -67,9 +67,9 @@ export default class FormField extends Component {
   }
 
   render() {
-    const { required, label, help } = this.props;
+    const { required, label, help, hasFeedback } = this.props;
     return (
-      <Form.Item label={label} {...DefaultModelFormLayout} required={required} help={help}>
+      <Form.Item label={label} {...DefaultModelFormLayout} required={required} help={help} hasFeedback={hasFeedback}>
         {this.renderChildren()}
       </Form.Item>
     );

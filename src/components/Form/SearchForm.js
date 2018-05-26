@@ -15,7 +15,7 @@ class SearchForm extends React.PureComponent {
     min: 999,
     queryText: '查询',
     resetText: '清除',
-    extendText: '更多',
+    expandText: '更多条件',
   };
 
   static propTypes = {
@@ -23,7 +23,7 @@ class SearchForm extends React.PureComponent {
     min: PropTypes.number,
     queryText: PropTypes.string,
     resetText: PropTypes.string,
-    extendText: PropTypes.string,
+    expandText: PropTypes.string,
     form: PropTypes.any.isRequired,
   };
 
@@ -92,11 +92,11 @@ class SearchForm extends React.PureComponent {
   }
 
   renderExtend(expand) {
-    const { children, extendText, min } = this.props;
+    const { children, extendText, min, expandText } = this.props;
     if (children.length > min) {
       return (
-        <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggle.bind(this)}>
-          {extendText} <Icon type={expand ? 'up' : 'down'} />
+        <a style={{ marginRight: 16, fontSize: 12 }} onClick={this.toggle.bind(this)}>
+          {extendText || expandText} <Icon type={expand ? 'up' : 'down'}/>
         </a>
       );
     }
@@ -110,9 +110,9 @@ class SearchForm extends React.PureComponent {
         <FormLayout form={this.form}>
           {this.renderItems()}
           <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
+            {this.renderExtend(expand)}
             <Button type='primary' onClick={this.handleSearch.bind(this)}>{queryText}</Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset.bind(this)}>{resetText}</Button>
-            {this.renderExtend(expand)}
           </Col>
         </FormLayout>
       </Form>

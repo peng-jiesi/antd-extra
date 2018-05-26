@@ -1,9 +1,11 @@
 import dva from 'dva';
-import './index.css';
+import '../src/index.less';
+import {ModalView} from "../src";
 
 // 1. Initialize
 const app = dva();
 
+ModalView.bindApp(app);
 // 2. Plugins
 // app.use({});
 
