@@ -8,8 +8,8 @@ import {Col, Form, Row} from 'antd';
 import PropTypes from 'prop-types';
 
 const DefaultModelFormLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
 };
 
 export default class FormField extends Component {
