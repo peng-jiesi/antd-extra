@@ -1,11 +1,61 @@
 import * as ReactDOM from 'react-dom';
-import {Modal} from 'antd';
+import {LocaleProvider, Modal} from 'antd';
 import React, {Component, createElement} from 'react';
+import ModalPage from "../../../example/routes/ModalPage";
+import {connect} from "dva/index";
 
 const defultConfig = {
   width: '860px',
   title: 'Modal'
 }
+
+
+/**
+ * 提供全局弹窗, 弹窗内Component可以直接使用connect
+ *
+ * ```js
+ * // 使用时首先在  dva index.js 中绑定
+ * ModalView.bindApp(app);
+ *
+ *
+ * // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
+ * // modalConfig 见 antd Modal
+ * ModalView.open(ModalPage,{modalConfig})
+ *
+ *
+ *
+ * // ModalPage中可以通过 props.modalRef.close() 关闭弹窗
+ * ```
+ *
+ * ModalPage.js
+ * ```js
+ *  * @connect()
+ * export default class ModalPage extends React.Component {
+ *
+ *   render() {
+ *     return (
+ *       <Fragment>
+ *         <DetailView title={'详情展示'}>
+ *           <AttributeLabel label={'测试'}>123123123123</AttributeLabel>
+ *         </DetailView>
+ *
+ *         <ModalFooter>
+ *           <Button
+ *             onClick={() => {
+ *               this.props.modalRef.close();
+ *             }}
+ *           >
+ *             Close
+ *           </Button>
+ *         </ModalFooter>
+ *       </Fragment>
+ *     )
+ *   }
+ * }
+ * ```
+ */
+
+
 
 export default class ModalView extends Component {
   static app = undefined;
@@ -58,6 +108,7 @@ export default class ModalView extends Component {
   }
 
 
+  // todo 国际化问题需要处理
   render() {
     return (
       <Modal className="antd-x-content-modal" {...this.props} >{this.props.content}</Modal>

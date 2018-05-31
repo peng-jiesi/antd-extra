@@ -2,11 +2,34 @@
  * FormLayout
  * Created by pengj on 2018-4-29.
  */
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Col, Row} from 'antd';
 import _ from 'lodash';
 
+/**
+ * 表单局部组件, 用于提供多行布局表单
+ *
+ * 直接放入FormField
+ *```html
+ * <FormLayout form={form} compact={true} cols={4}>
+ *   <FormField
+ *   label={"Test Label1111111111111"}
+ *   name={"test"}
+ *   required
+ *   >
+ *      <Input/>
+ *   </FormField>
+ * </FormLayout>
+ * ```
+ *
+ * 放入Fragment包裹的元素, 会被展开
+ *```html
+ * <FormLayout form={form} compact={true} cols={4}>
+ *    <Fragment></Fragment>
+ * </FormLayout>
+ * ```
+ */
 export default class FormLayout extends React.PureComponent {
   static defaultProps = {
     cols: 1,
@@ -15,9 +38,24 @@ export default class FormLayout extends React.PureComponent {
   };
 
   static propTypes = {
+    /**
+     * Form.create()包装后的 props.form
+     */
     form: PropTypes.any.isRequired,
+
+    /**
+     * 布局展示几行
+     */
     cols: PropTypes.number,
+
+    /**
+     * 是否紧缩布局
+     */
     compact: PropTypes.bool,
+
+    /**
+     * Row  gutter
+     */
     gutter: PropTypes.number,
   };
 

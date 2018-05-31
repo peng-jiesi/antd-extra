@@ -9,6 +9,9 @@ import isFunction from 'lodash/isFunction';
 import isArray from 'lodash/isArray';
 import FormLayout from './FormLayout';
 
+/**
+ * 自动布局查询表单,  可以通过min调整, 提供高级搜索能力
+ */
 class SearchForm extends React.PureComponent {
 
   static defaultProps = {
@@ -19,12 +22,53 @@ class SearchForm extends React.PureComponent {
   };
 
   static propTypes = {
+
+    /**
+     * 查询函数   (values) => {}
+     */
     onSearch: PropTypes.func.isRequired,
+
+    /**
+     * 精简模式下展示多少条件
+     */
     min: PropTypes.number,
+
+    /**
+     * 查询按钮文字
+     */
     queryText: PropTypes.string,
+
+    /**
+     * 重置按钮文字
+     */
     resetText: PropTypes.string,
+
+    /**
+     * 展开按钮文字
+     */
     expandText: PropTypes.string,
+
+    /**
+     * 布局展示几行  FormLayout cols
+     */
+    cols: PropTypes.number,
+
+    /**
+     * 是否紧缩布局   FormLayout compact
+     */
+    compact: PropTypes.bool,
+
+    /**
+     * FormLayout gutter
+     */
+    gutter: PropTypes.number,
+
+    /**
+     * Form.create()包装后的 props.form
+     */
     form: PropTypes.any.isRequired,
+
+
   };
 
   static contextTypes = {
@@ -104,10 +148,10 @@ class SearchForm extends React.PureComponent {
 
   render() {
     const { expand } = this.state;
-    const { queryText, resetText } = this.props;
+    const { queryText, resetText, cols, compact, gutter } = this.props;
     return (
       <Form className='antd-x-search-form'>
-        <FormLayout form={this.form}>
+        <FormLayout form={this.form} cols={cols} compact={compact} gutter={gutter}>
           {this.renderItems()}
           <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
             {this.renderExtend(expand)}

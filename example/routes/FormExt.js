@@ -109,6 +109,14 @@ export default class FormExt extends React.Component {
               </FormField>
 
             </Fragment>
+
+            <FormField
+              label={"Test Label"}
+              name={"test"}
+              required
+            >
+              <Input/>
+            </FormField>
           </FormLayout>
         </Form>
       </div>

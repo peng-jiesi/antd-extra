@@ -12,15 +12,39 @@ const DefaultModelFormLayout = {
   wrapperCol: { span: 16 },
 };
 
+/**
+ * 包装form.getFieldDecorator  和 From.Item
+ */
 export default class FormField extends Component {
   static defaultProps = {};
 
   static propTypes = {
+    /**
+     * Form.create()包装后的 props.form,  如果包裹在FormLayout 或者提供 context.form组件下, 可以不传
+     */
     form: PropTypes.any,
+    /**
+     * 是否必填, 默认提示为 ${label}必须填写
+     */
     required: PropTypes.any,
+    /**
+     *  Form.Item  label
+     */
     label: PropTypes.any,
+    /**
+     * Form.Item  help
+     */
     help: PropTypes.any,
-    action: PropTypes.any,
+    /**
+     * Form.Item  rules
+     */
+    rules:PropTypes.array,
+
+    /**
+     * 在Form.Item 对象布局后提供一个action区
+     */
+    action: PropTypes.element,
+
   };
 
   static contextTypes = {
@@ -41,7 +65,7 @@ export default class FormField extends Component {
 
     const itemRules = rules || [];
     if (required) {
-      itemRules.unshift({ required: true, message: `${label} is required` });
+      itemRules.unshift({ required: true, message: `${label}必须填写` });
     }
 
     const fieldName = name;

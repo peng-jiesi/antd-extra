@@ -1,6 +1,12 @@
 import React, {PureComponent} from 'react';
 import {Button} from 'antd';
 
+/**
+ * Table中的Button
+ * ```html
+ * <LinkButton onClick={}>删除</LinkButton>
+ * ```
+ */
 export default class LinkButton extends PureComponent {
   static defaultProps = {};
 

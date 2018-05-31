@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
+    "doc": "rimraf Document.md && react-doc-generator ./src/ -o Document.md",
     "example": "roadhog server",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint",
@@ -36,6 +37,7 @@
     "husky": "^0.12.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-doc-generator": "^1.2.5",
     "react-dom": "^16.2.0",
     "react-to-typescript-definitions": "^1.0.0",
     "redbox-react": "^1.4.3",

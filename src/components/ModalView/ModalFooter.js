@@ -5,6 +5,21 @@
 
 import React, { Component } from 'react';
 
+/**
+ * 包裹在ModalView下的footer
+ *
+ * ```html
+ * <ModalFooter>
+ *   <Button
+ *     onClick={() => {
+ *       this.props.modalRef.close();
+ *     }}
+ *   >
+ *     Close
+ *   </Button>
+ * </ModalFooter>
+ * ```
+ */
 export default class ModalFooter extends Component {
   render() {
     return (
