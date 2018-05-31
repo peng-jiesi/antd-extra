@@ -7,25 +7,68 @@ import PropTypes from 'prop-types';
 import {Button, Col, Form, Icon} from 'antd';
 import isFunction from 'lodash/isFunction';
 import isArray from 'lodash/isArray';
-import styles from './SearchForm.less';
 import FormLayout from './FormLayout';
 
+/**
+ * 自动布局查询表单,  可以通过min调整, 提供高级搜索能力
+ */
 class SearchForm extends React.PureComponent {
 
   static defaultProps = {
     min: 999,
     queryText: '查询',
     resetText: '清除',
-    extendText: '更多',
+    expandText: '更多条件',
   };
 
   static propTypes = {
+
+    /**
+     * 查询函数   (values) => {}
+     */
     onSearch: PropTypes.func.isRequired,
+
+    /**
+     * 精简模式下展示多少条件
+     */
     min: PropTypes.number,
+
+    /**
+     * 查询按钮文字
+     */
     queryText: PropTypes.string,
+
+    /**
+     * 重置按钮文字
+     */
     resetText: PropTypes.string,
-    extendText: PropTypes.string,
+
+    /**
+     * 展开按钮文字
+     */
+    expandText: PropTypes.string,
+
+    /**
+     * 布局展示几行  FormLayout cols
+     */
+    cols: PropTypes.number,
+
+    /**
+     * 是否紧缩布局   FormLayout compact
+     */
+    compact: PropTypes.bool,
+
+    /**
+     * FormLayout gutter
+     */
+    gutter: PropTypes.number,
+
+    /**
+     * Form.create()包装后的 props.form
+     */
     form: PropTypes.any.isRequired,
+
+
   };
 
   static contextTypes = {
@@ -93,11 +136,11 @@ class SearchForm extends React.PureComponent {
   }
 
   renderExtend(expand) {
-    const { children, extendText, min } = this.props;
+    const { children, extendText, min, expandText } = this.props;
     if (children.length > min) {
       return (
-        <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggle.bind(this)}>
-          {extendText} <Icon type={expand ? 'up' : 'down'} />
+        <a style={{ marginRight: 16, fontSize: 12 }} onClick={this.toggle.bind(this)}>
+          {extendText || expandText} <Icon type={expand ? 'up' : 'down'}/>
         </a>
       );
     }
@@ -105,15 +148,15 @@ class SearchForm extends React.PureComponent {
 
   render() {
     const { expand } = this.state;
-    const { queryText, resetText } = this.props;
+    const { queryText, resetText, cols, compact, gutter } = this.props;
     return (
-      <Form className={styles.searchForm}>
-        <FormLayout form={this.form}>
+      <Form className='antd-x-search-form'>
+        <FormLayout form={this.form} cols={cols} compact={compact} gutter={gutter}>
           {this.renderItems()}
           <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
+            {this.renderExtend(expand)}
             <Button type='primary' onClick={this.handleSearch.bind(this)}>{queryText}</Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleReset.bind(this)}>{resetText}</Button>
-            {this.renderExtend(expand)}
           </Col>
         </FormLayout>
       </Form>
