@@ -20,7 +20,8 @@ const defultConfig = {
  *
  * // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
  * // modalConfig 见 antd Modal
- * ModalView.open(ModalPage,{modalConfig})
+ * // contentProps  可以直接传递给Component
+ * ModalView.open(ModalPage,modalConfig,contentProps)
  *
  *
  *
@@ -64,7 +65,7 @@ export default class ModalView extends Component {
     ModalView.app = app;
   }
 
-  static open(content, config = {}) {
+  static open(content, config = {}, contentProps = {}) {
     if (!ModalView.app) {
       throw new Error('Please ModalView.bindApp(app); in dva index.js');
     }
@@ -98,7 +99,11 @@ export default class ModalView extends Component {
       ReactDOM.render(<ModalView {...props} />, div);
     }
 
-    const contenInst = createElement(content, { store: ModalView.app._store, modalRef: { close: onCancel } })
+    const contenInst = createElement(content, {
+      ...contentProps,
+      store: ModalView.app._store,
+      modalRef: { close: onCancel }
+    })
     // const contenInst = <ModelComponent store={ModalView.app._store} modalRef={{ close: onCancel }} />;
     render({ ...defultConfig, ...config, content: contenInst, footer: null, visible: true, onCancel });
     return {

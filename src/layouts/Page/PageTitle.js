@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 export default class PageTitle extends React.PureComponent {
   static defaultProps = {
     color: '#646464',
+    size: ''
   };
 
   static propTypes = {
@@ -22,12 +23,18 @@ export default class PageTitle extends React.PureComponent {
      * 操作区域
      */
     actions: PropTypes.any,
+
+    /**
+     * 尺寸  可用 small
+     */
+    size: PropTypes.string
   };
 
   render() {
-    const { children, color, actions } = this.props;
+    const { children, color, actions,size } = this.props;
+    
     return (
-      <h2 className='antd-x-page-title' style={{ borderLeftColor: color }}>
+      <h2 className={`antd-x-page-title ${size}`} style={{ borderLeftColor: color }}>
         {children}
         <div className='actions'>{actions}</div>
       </h2>

@@ -5,7 +5,6 @@ import _get from 'lodash/get';
 import PageTitle from "../../layouts/Page/PageTitle";
 
 
-
 /**
  * 信息展示视图, 通过key value模式展示, 提供布局能力
  *
@@ -38,6 +37,11 @@ export default class DetailView extends PureComponent {
     cols: PropTypes.number,
 
     /**
+     * 背景色
+     */
+    bgColor: PropTypes.string,
+
+    /**
      * Row gutter 见:PageTitle  gutter
      */
     gutter: PropTypes.number,
@@ -51,6 +55,11 @@ export default class DetailView extends PureComponent {
      * 标题操作 见:PageTitle actions
      */
     actions: PropTypes.any,
+
+    /**
+     * 标题大小, 见: PageTitle size
+     */
+    titleSize: PropTypes.string
   };
 
   constructor(props) {
@@ -60,7 +69,7 @@ export default class DetailView extends PureComponent {
 
   renderCol(ele) {
     const { cols } = this.props;
-    const eleColSpan = _get(ele,'props.size', 1);
+    const eleColSpan = _get(ele, 'props.size', 1);
     const colSpan = 24 / cols * eleColSpan;
     return (
       <Col span={colSpan} key={`col_${ this.keyIdx++ }`}>
@@ -88,8 +97,9 @@ export default class DetailView extends PureComponent {
   }
 
   render() {
-    const { title, color, actions } = this.props;
-    const header = title ? <PageTitle {...{ color, actions }}>{title}</PageTitle> : null;
+    const { title, color, actions, titleSize } = this.props;
+    const header = title ? <PageTitle {...{ color, actions }} size={titleSize}>{title}</PageTitle> : null;
+
     return (
       <div className='antd-x-detail-view'>
         {header}

@@ -24,7 +24,8 @@ class SearchForm extends React.PureComponent {
   static propTypes = {
 
     /**
-     * 查询函数   (values) => {}
+     * 查询函数   (values,event:{action}) => {}
+     * event.action 触发动作 查询(SEARCH)或者重置(RESET)
      */
     onSearch: PropTypes.func.isRequired,
 
@@ -88,18 +89,22 @@ class SearchForm extends React.PureComponent {
     };
   }
 
-  handleSearch() {
+  invokeSearch(action) {
     const { onSearch } = this.props;
     if (!isFunction(onSearch)) {
       console.warn('onSearch must be function');
     } else {
-      onSearch(this.form.getFieldsValue());
+      onSearch(this.form.getFieldsValue(), { action });
     }
+  }
+
+  handleSearch() {
+    this.invokeSearch('SEARCH');
   }
 
   handleReset() {
     this.form.resetFields();
-    this.handleSearch();
+    this.invokeSearch('RESET');
   }
 
   toggle() {
@@ -155,8 +160,8 @@ class SearchForm extends React.PureComponent {
           {this.renderItems()}
           <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
             {this.renderExtend(expand)}
-            <Button type='primary' onClick={this.handleSearch.bind(this)}>{queryText}</Button>
-            <Button style={{ marginLeft: 8 }} onClick={this.handleReset.bind(this)}>{resetText}</Button>
+            <Button type='primary' icon="search" onClick={this.handleSearch.bind(this)}>{queryText}</Button>
+            <Button style={{ marginLeft: 8 }} icon="reload" onClick={this.handleReset.bind(this)}>{resetText}</Button>
           </Col>
         </FormLayout>
       </Form>
