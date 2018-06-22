@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {connect} from 'dva';
-import {Form, Input} from 'antd';
+import {Button, Form, Input} from 'antd';
 import {FormField, FormLayout, SearchForm} from "../../src";
 
 @Form.create()
@@ -48,7 +48,15 @@ export default class FormExt extends React.Component {
 
     return (
       <div>
-        <SearchForm min={3} form={form} onSearch={(data) => {console.log(data);}}>
+        <SearchForm min={2} form={form} onSearch={(data) => {console.log(data);}}>
+          {this.renderItem1()}
+        </SearchForm>
+
+        <SearchForm cols={4} min={2}  form={form} onSearch={(data) => {console.log(data);}}>
+          {this.renderItem1()}
+        </SearchForm>
+
+        <SearchForm cols={4} min={2} actions={ <Button>测试</Button> } form={form} onSearch={(data) => {console.log(data);}}>
           {this.renderItem1()}
         </SearchForm>
 

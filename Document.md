@@ -79,7 +79,8 @@ gutter|number|no|8|Row  gutter
 
 Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-onSearch|func|yes||查询函数   (values) &#x3D;&gt; {}
+onSearch|func|yes||查询函数   (values,event:{action}) &#x3D;&gt; {}
+event.action 触发动作 查询(SEARCH)或者重置(RESET)
 min|number|no|999|精简模式下展示多少条件
 queryText|string|no|&lt;See the source code&gt;|查询按钮文字
 resetText|string|no|&lt;See the source code&gt;|重置按钮文字
@@ -124,7 +125,8 @@ ModalView.bindApp(app);
 
 // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
 // modalConfig 见 antd Modal
-ModalView.open(ModalPage,{modalConfig})
+// contentProps  可以直接传递给Component
+ModalView.open(ModalPage,modalConfig,contentProps)
 
 
 
@@ -201,9 +203,11 @@ Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
 title|any|no||详情标题, 如果没有不展示头
 cols|number|no|4|布局行数
+bgColor|string|no||背景色
 gutter|number|no|8|Row gutter 见:PageTitle  gutter
 color|string|no||标题头的颜色 见:PageTitle color
 actions|any|no||标题操作 见:PageTitle actions
+titleSize|string|no||标题大小, 见: PageTitle size
 -----
 **src\layouts\Page\PageLayout.js**
 
@@ -229,4 +233,5 @@ Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
 color|string|no|&lt;See the source code&gt;|竖条颜色
 actions|any|no||操作区域
+size|string|no|&lt;See the source code&gt;|尺寸  可用 small
 -----

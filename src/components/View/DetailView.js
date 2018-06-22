@@ -97,11 +97,12 @@ export default class DetailView extends PureComponent {
   }
 
   render() {
-    const { title, color, actions, titleSize } = this.props;
+    const { title, color, actions, titleSize, bgColor } = this.props;
     const header = title ? <PageTitle {...{ color, actions }} size={titleSize}>{title}</PageTitle> : null;
+    const style = {backgroundColor :bgColor };
 
     return (
-      <div className='antd-x-detail-view'>
+      <div className='antd-x-detail-view' style={style}>
         {header}
         {this.warpLayout()}
       </div>

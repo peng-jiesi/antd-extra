@@ -1,13 +1,7 @@
 import * as ReactDOM from 'react-dom';
-import {LocaleProvider, Modal} from 'antd';
 import React, {Component, createElement} from 'react';
-import ModalPage from "../../../example/routes/ModalPage";
-import {connect} from "dva/index";
-
-const defultConfig = {
-  width: '860px',
-  title: 'Modal'
-}
+import {Modal} from 'antd';
+import 'antd/lib/modal/style/css';
 
 
 /**
@@ -20,6 +14,7 @@ const defultConfig = {
  *
  * // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
  * // modalConfig 见 antd Modal
+ * // modalConfig.place  支持侧边栏模式弹窗, right | left
  * // contentProps  可以直接传递给Component
  * ModalView.open(ModalPage,modalConfig,contentProps)
  *
@@ -104,8 +99,30 @@ export default class ModalView extends Component {
       store: ModalView.app._store,
       modalRef: { close: onCancel }
     })
+
+
+    const defultConfig = {
+      width: '860px',
+      title: 'Modal'
+    };
+
+    const { place } = config;
+
+    if (place === 'right' || place === 'left') {
+      defultConfig.width = '380px'
+    }
+
+    const modelProps = {
+      ...defultConfig,
+      ...config,
+      content: contenInst,
+      footer: null,
+      visible: true,
+      onCancel
+    };
+
     // const contenInst = <ModelComponent store={ModalView.app._store} modalRef={{ close: onCancel }} />;
-    render({ ...defultConfig, ...config, content: contenInst, footer: null, visible: true, onCancel });
+    render(modelProps);
     return {
       destroy: onCancel,
       close: onCancel,
@@ -115,8 +132,9 @@ export default class ModalView extends Component {
 
   // todo 国际化问题需要处理
   render() {
+    const { place } = this.props;
     return (
-      <Modal className="antd-x-content-modal" {...this.props} >{this.props.content}</Modal>
+      <Modal className={`antd-x-content-modal ${place}`} {...this.props} >{this.props.content}</Modal>
     );
   }
 }

@@ -73,13 +73,20 @@ export default class FormLayout extends React.PureComponent {
 
     return React.Children.map(children, (item, idx) => {
 
+
+      // 如果是Col类型,直接吐出
+      if(item.type.toString().indexOf('Col')!== -1){
+        return item;
+      }
+
+      // 如果是fragment包装子结点
       if (item.type === Symbol.for('react.fragment')) {
         return React.Children.map(item.props.children, (inner, idxInner) => {
           return (
             <Col span={span} key={`col_${idx}_${idxInner}`}>
               {inner}
             </Col>
-          )
+          );
         });
       }
 

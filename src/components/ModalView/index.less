@@ -10,7 +10,7 @@
 
   .modal-footer {
     background-color: #FFF;
-    margin: 12px -24px -24px -24px;
+    margin: 12px -24px -23px -24px;
     border-top: 1px solid #e8e8e8;
     padding: 10px;
     text-align: right;
@@ -29,7 +29,33 @@
   }
 
   &.right{
-    
+    float: right;
+    top: 0;
+    box-sizing: border-box;
+    padding: 0;
+
+    .ant-modal-content{
+      height: 100vh;
+
+      .ant-modal-body {
+        max-height: 100vh;
+      }
+    }
+  }
+
+  &.left{
+    float: left;
+    top: 0;
+    box-sizing: border-box;
+    padding: 0;
+
+    .ant-modal-content{
+      height: 100vh;
+
+      .ant-modal-body {
+        max-height: 100vh;
+      }
+    }
   }
 }
 

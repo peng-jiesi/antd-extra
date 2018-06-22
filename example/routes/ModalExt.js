@@ -17,6 +17,22 @@ export default class FormExt extends React.Component {
         >
           Open
         </Button>
+
+        <Button
+          onClick={() => {
+            ModalView.open(ModalPage, { place: 'right' })
+          }}
+        >
+          Open Right
+        </Button>
+
+        <Button
+          onClick={() => {
+            ModalView.open(ModalPage, { place: 'left' })
+          }}
+        >
+          Open Left
+        </Button>
       </Fragment>
     )
   }

@@ -11,6 +11,12 @@ import FormLayout from './FormLayout';
 
 /**
  * 自动布局查询表单,  可以通过min调整, 提供高级搜索能力
+ *
+ * ```
+ * <SearchForm cols={4} min={2} actions={ <Button>测试</Button> } form={form} onSearch={(data) => {console.log(data);}}>
+ *   {this.renderItem1()}
+ * </SearchForm>
+ * ```
  */
 class SearchForm extends React.PureComponent {
 
@@ -19,6 +25,8 @@ class SearchForm extends React.PureComponent {
     queryText: '查询',
     resetText: '清除',
     expandText: '更多条件',
+    compact: true,
+    cols: 3
   };
 
   static propTypes = {
@@ -69,6 +77,15 @@ class SearchForm extends React.PureComponent {
      */
     form: PropTypes.any.isRequired,
 
+    /**
+     * 放置在查询按钮后的 扩展按钮
+     */
+    actions: PropTypes.any,
+
+    /**
+     * style
+     */
+    style: PropTypes.any
 
   };
 
@@ -130,21 +147,15 @@ class SearchForm extends React.PureComponent {
     } else {
       showItem = children.slice(0, this.props.min);
     }
-    return showItem.map((item, idx) => {
-      return (
-        // eslint-disable-next-line react/no-array-index-key
-        <Col span={8} key={`col_${idx}`}>
-          {item}
-        </Col>
-      );
-    });
+
+    return showItem;
   }
 
   renderExtend(expand) {
     const { children, extendText, min, expandText } = this.props;
     if (children.length > min) {
       return (
-        <a style={{ marginRight: 16, fontSize: 12 }} onClick={this.toggle.bind(this)}>
+        <a style={{ marginRight: 12, fontSize: 12 }} onClick={this.toggle.bind(this)}>
           {extendText || expandText} <Icon type={expand ? 'up' : 'down'}/>
         </a>
       );
@@ -153,15 +164,16 @@ class SearchForm extends React.PureComponent {
 
   render() {
     const { expand } = this.state;
-    const { queryText, resetText, cols, compact, gutter } = this.props;
+    const { queryText, resetText, cols, compact, gutter, actions, style } = this.props;
     return (
-      <Form className='antd-x-search-form'>
+      <Form className='antd-x-search-form' style={style}>
         <FormLayout form={this.form} cols={cols} compact={compact} gutter={gutter}>
           {this.renderItems()}
-          <Col style={{ textAlign: 'right', paddingBottom: '12px' }}>
+          <Col className='actions'>
             {this.renderExtend(expand)}
             <Button type='primary' icon="search" onClick={this.handleSearch.bind(this)}>{queryText}</Button>
-            <Button style={{ marginLeft: 8 }} icon="reload" onClick={this.handleReset.bind(this)}>{resetText}</Button>
+            <Button icon="reload" onClick={this.handleReset.bind(this)}>{resetText}</Button>
+            {actions}
           </Col>
         </FormLayout>
       </Form>
