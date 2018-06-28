@@ -1,5 +1,6 @@
 import dva from 'dva';
 import '../src/index.less';
+import './theme.less';
 import {ModalView} from "../src";
 
 // 1. Initialize

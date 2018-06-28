@@ -72,7 +72,13 @@ gutter|number|no|8|Row  gutter
 
 ### 1. SearchForm
 
-自动布局查询表单,  可以通过min调整, 提供高级搜索能力   
+自动布局查询表单,  可以通过min调整, 提供高级搜索能力
+
+```
+<SearchForm cols={4} min={2} actions={ <Button>测试</Button> } form={form} onSearch={(data) => {console.log(data);}}>
+  {this.renderItem1()}
+</SearchForm>
+```   
 
 
 
@@ -85,10 +91,12 @@ min|number|no|999|精简模式下展示多少条件
 queryText|string|no|&lt;See the source code&gt;|查询按钮文字
 resetText|string|no|&lt;See the source code&gt;|重置按钮文字
 expandText|string|no|&lt;See the source code&gt;|展开按钮文字
-cols|number|no||布局展示几行  FormLayout cols
-compact|bool|no||是否紧缩布局   FormLayout compact
+cols|number|no|3|布局展示几行  FormLayout cols
+compact|bool|no|true|是否紧缩布局   FormLayout compact
 gutter|number|no||FormLayout gutter
 form|any|yes||Form.create()包装后的 props.form
+actions|any|no||放置在查询按钮后的 扩展按钮
+style|any|no||style
 -----
 **src\components\ModalView\ModalFooter.js**
 
@@ -125,6 +133,7 @@ ModalView.bindApp(app);
 
 // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
 // modalConfig 见 antd Modal
+// modalConfig.place  支持侧边栏模式弹窗, right | left
 // contentProps  可以直接传递给Component
 ModalView.open(ModalPage,modalConfig,contentProps)
 
@@ -231,7 +240,7 @@ titleSize|string|no||标题大小, 见: PageTitle size
 
 Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-color|string|no|&lt;See the source code&gt;|竖条颜色
+color|string|no||竖条颜色
 actions|any|no||操作区域
 size|string|no|&lt;See the source code&gt;|尺寸  可用 small
 -----

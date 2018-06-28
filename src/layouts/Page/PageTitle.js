@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
  */
 export default class PageTitle extends React.PureComponent {
   static defaultProps = {
-    color: '#646464',
     size: ''
   };
 

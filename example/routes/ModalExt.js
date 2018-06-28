@@ -20,7 +20,7 @@ export default class FormExt extends React.Component {
 
         <Button
           onClick={() => {
-            ModalView.open(ModalPage, { place: 'right' })
+            ModalView.open(ModalPage, { place: 'right', mask: false, maskClosable: false, noHover: true })
           }}
         >
           Open Right
@@ -28,7 +28,7 @@ export default class FormExt extends React.Component {
 
         <Button
           onClick={() => {
-            ModalView.open(ModalPage, { place: 'left' })
+            ModalView.open(ModalPage, { place: 'left' ,noHover: true})
           }}
         >
           Open Left

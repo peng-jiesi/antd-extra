@@ -106,10 +106,10 @@ export default class ModalView extends Component {
       title: 'Modal'
     };
 
-    const { place } = config;
+    const { place, noHover } = config;
 
     if (place === 'right' || place === 'left') {
-      defultConfig.width = '380px'
+      defultConfig.width = '380px';
     }
 
     const modelProps = {
@@ -120,6 +120,11 @@ export default class ModalView extends Component {
       visible: true,
       onCancel
     };
+
+
+    if (place && noHover) {
+      modelProps.wrapClassName = modelProps.wrapClassName ? `no-hover ${place} ${modelProps.wrapClassName}` : `no-hover ${place}`
+    }
 
     // const contenInst = <ModelComponent store={ModalView.app._store} modalRef={{ close: onCancel }} />;
     render(modelProps);

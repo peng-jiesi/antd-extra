@@ -28,8 +28,7 @@ export default class AttributeLabel extends PureComponent {
 
   render() {
     const { title, children, label, size } = this.props;
-    const width = 100 / 4 / size;
-    console.log(width);
+    const width = 100 / 3 / size;
     return (
       <div className='attribute' title={title}>
         <span className='label' style={{width:`${width}%`}}>{label}</span> {children}
