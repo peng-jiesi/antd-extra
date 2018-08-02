@@ -38,12 +38,17 @@ export default class FormField extends Component {
     /**
      * Form.Item  rules
      */
-    rules:PropTypes.array,
+    rules: PropTypes.array,
 
     /**
      * 在Form.Item 对象布局后提供一个action区
      */
     action: PropTypes.element,
+
+    /**
+     * 是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols = 2  4 的时候使用,  3 会有偏移
+     */
+    block: PropTypes.bool
 
   };
 
@@ -91,9 +96,13 @@ export default class FormField extends Component {
   }
 
   render() {
-    const { required, label, help, hasFeedback } = this.props;
+    const props = {
+      ...DefaultModelFormLayout,
+      ...this.props,
+    }
+
     return (
-      <Form.Item label={label} {...DefaultModelFormLayout} required={required} help={help} hasFeedback={hasFeedback}>
+      <Form.Item {...props}>
         {this.renderChildren()}
       </Form.Item>
     );

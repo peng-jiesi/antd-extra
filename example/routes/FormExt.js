@@ -52,11 +52,12 @@ export default class FormExt extends React.Component {
           {this.renderItem1()}
         </SearchForm>
 
-        <SearchForm cols={4} min={2}  form={form} onSearch={(data) => {console.log(data);}}>
+        <SearchForm cols={4} min={2} form={form} onSearch={(data) => {console.log(data);}}>
           {this.renderItem1()}
         </SearchForm>
 
-        <SearchForm cols={4} min={2} actions={ <Button>测试</Button> } form={form} onSearch={(data) => {console.log(data);}}>
+        <SearchForm cols={4} min={2} actions={<Button>测试</Button>} form={form}
+                    onSearch={(data) => {console.log(data);}}>
           {this.renderItem1()}
         </SearchForm>
 
@@ -99,23 +100,29 @@ export default class FormExt extends React.Component {
         </Form>
 
         <Form>
-          <FormLayout form={form} compact={true} cols={4}>
+          <FormLayout form={form} compact={true} cols={2}>
             <Fragment>
-              <FormField
-                label={"Test Label1111111111111"}
-                name={"test"}
-                required
-              >
+              <FormField block label={"Test Label11111111111"} name={"test"} required>
                 <Input/>
               </FormField>
-              <FormField
-                label={"Test Label21111111111111"}
-                name={"test2"}
-                required
-              >
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
                 <Input/>
               </FormField>
-
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
+                <Input/>
+              </FormField>
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
+                <Input/>
+              </FormField>
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
+                <Input/>
+              </FormField>
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
+                <Input/>
+              </FormField>
+              <FormField label={"Test Label22222222222"} name={"test2"} required>
+                <Input/>
+              </FormField>
             </Fragment>
 
             <FormField

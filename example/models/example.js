@@ -13,7 +13,19 @@ export default {
   effects: {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
       yield put({ type: 'save' });
+      
+      
     },
+    
+    
+    * randomData({},{put}){
+      
+      // 
+      
+      setTimeout(() => {
+        put({type:'xxx',payload:{}})
+      })
+    }
   },
 
   reducers: {

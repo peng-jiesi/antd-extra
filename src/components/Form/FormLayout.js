@@ -29,6 +29,21 @@ import _ from 'lodash';
  *    <Fragment></Fragment>
  * </FormLayout>
  * ```
+ *
+ * 下级元素存在block属性时, 会展开为单行, 建议用cols=2 | 4 的时候使用
+ *```html
+ * <FormLayout form={form} compact={true} cols={4}>
+ *   <FormField block label={"Test Label11111111111"} name={"test"} required>
+ *     <Input/>
+ *   </FormField>
+ *   <FormField label={"Test Label22222222222"} name={"test2"} required>
+ *     <Input/>
+ *   </FormField>
+ *   <FormField label={"Test Label22222222222"} name={"test2"} required>
+ *     <Input/>
+ *   </FormField>
+ * </FormLayout>
+ * ```
  */
 export default class FormLayout extends React.PureComponent {
   static defaultProps = {
@@ -67,44 +82,64 @@ export default class FormLayout extends React.PureComponent {
     return { form: this.props.form }
   }
 
+  renderChildren(inner, key) {
+    const { cols } = this.props;
+
+    if (inner.props.block) {
+      let ele;
+      if (inner.props.labelCol) {
+        ele = inner;
+      } else {
+
+        const labelSpan = Math.ceil(24 / cols / 3);
+        console.log(labelSpan);
+        ele = React.cloneElement(inner, {
+          labelCol: { span: labelSpan },
+          wrapperCol: { span: 24 - labelSpan }
+        })
+      }
+
+      console.log(ele);
+      return (
+        <Col span={24} key={key}>
+          {/*labelCol={{ span: 4 }}*/}
+          {/*wrapperCol={{ span: 20 }}*/}
+          {ele}
+        </Col>
+      );
+    } else {
+      return (
+        <Col span={24 / cols} key={key}>
+          {inner}
+        </Col>
+      );
+    }
+  }
+
   warpItems() {
-    const { cols, children } = this.props;
-    const span = 24 / cols;
+    const { children } = this.props;
 
     return React.Children.map(children, (item, idx) => {
 
 
       // 如果是Col类型,直接吐出
-      if(item.type.toString().indexOf('Col')!== -1){
+      if (item.type.toString().indexOf('Col') !== -1) {
         return item;
       }
 
       // 如果是fragment包装子结点
       if (item.type === Symbol.for('react.fragment')) {
         return React.Children.map(item.props.children, (inner, idxInner) => {
-          return (
-            <Col span={span} key={`col_${idx}_${idxInner}`}>
-              {inner}
-            </Col>
-          );
+          return this.renderChildren(inner, `col_${idx}_${idxInner}`);
         });
       }
 
       if (_.isArray(item)) {
         return item.map((inner, idxInner) => {
-          return (
-            <Col span={span} key={`col_${idx}_${idxInner}`}>
-              {inner}
-            </Col>
-          )
+          return this.renderChildren(inner, `col_${idx}_${idxInner}`);
         })
       } else {
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <Col span={span} key={`col_${idx}`}>
-            {item}
-          </Col>
-        );
+        return this.renderChildren(item, `col_${idx}`);
       }
     })
   }
