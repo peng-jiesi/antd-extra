@@ -85,21 +85,21 @@ export default class FormLayout extends React.PureComponent {
   renderChildren(inner, key) {
     const { cols } = this.props;
 
+    if(inner === null) {
+      return inner;
+    }
+
     if (inner.props.block) {
       let ele;
       if (inner.props.labelCol) {
         ele = inner;
       } else {
-
         const labelSpan = Math.ceil(24 / cols / 3);
-        console.log(labelSpan);
         ele = React.cloneElement(inner, {
           labelCol: { span: labelSpan },
           wrapperCol: { span: 24 - labelSpan }
         })
       }
-
-      console.log(ele);
       return (
         <Col span={24} key={key}>
           {/*labelCol={{ span: 4 }}*/}

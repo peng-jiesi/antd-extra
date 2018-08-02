@@ -123,6 +123,7 @@ export default class FormExt extends React.Component {
               <FormField label={"Test Label22222222222"} name={"test2"} required>
                 <Input/>
               </FormField>
+              {null}
             </Fragment>
 
             <FormField
