@@ -85,7 +85,7 @@ export default class FormLayout extends React.PureComponent {
   renderChildren(inner, key) {
     const { cols } = this.props;
 
-    if(inner === null) {
+    if (inner === null) {
       return inner;
     }
 
@@ -121,9 +121,8 @@ export default class FormLayout extends React.PureComponent {
 
     return React.Children.map(children, (item, idx) => {
 
-
-      // 如果是Col类型,直接吐出
-      if (item.type.toString().indexOf('Col') !== -1) {
+      // 如果是nowarp对象,直接吐出
+      if (item.props.nowarp === true) {
         return item;
       }
 

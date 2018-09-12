@@ -29,8 +29,10 @@ form|any|no||Form.create()包装后的 props.form,  如果包裹在FormLayout �
 required|any|no||是否必填, 默认提示为 ${label}必须填写
 label|any|no||Form.Item  label
 help|any|no||Form.Item  help
-rules|array|no||Form.Item  rules
 action|element|no||在Form.Item 对象布局后提供一个action区
+block|bool|no||是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols &#x3D; 2  4 的时候使用,  3 会有偏移
+rules|array|no||Form.Item  rules
+valuePropName|any|no||getFieldDecorator, options.valuePropName
 -----
 **src\components\Form\FormLayout.js**
 
@@ -55,6 +57,21 @@ action|element|no||在Form.Item 对象布局后提供一个action区
 ```html
 <FormLayout form={form} compact={true} cols={4}>
    <Fragment></Fragment>
+</FormLayout>
+```
+
+下级元素存在block属性时, 会展开为单行, 建议用cols=2 | 4 的时候使用
+```html
+<FormLayout form={form} compact={true} cols={4}>
+  <FormField block label={"Test Label11111111111"} name={"test"} required>
+    <Input/>
+  </FormField>
+  <FormField label={"Test Label22222222222"} name={"test2"} required>
+    <Input/>
+  </FormField>
+  <FormField label={"Test Label22222222222"} name={"test2"} required>
+    <Input/>
+  </FormField>
 </FormLayout>
 ```   
 

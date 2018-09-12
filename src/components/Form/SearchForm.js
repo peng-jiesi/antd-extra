@@ -169,7 +169,7 @@ class SearchForm extends React.PureComponent {
       <Form className='antd-x-search-form' style={style}>
         <FormLayout form={this.form} cols={cols} compact={compact} gutter={gutter}>
           {this.renderItems()}
-          <Col className='actions'>
+          <Col className='actions' nowarp={true}>
             {this.renderExtend(expand)}
             <Button type='primary' icon="search" onClick={this.handleSearch.bind(this)}>{queryText}</Button>
             <Button icon="reload" onClick={this.handleReset.bind(this)}>{resetText}</Button>

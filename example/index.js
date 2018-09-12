@@ -1,4 +1,5 @@
 import dva from 'dva';
+import '@babel/polyfill';
 import '../src/index.less';
 import './theme.less';
 import {ModalView} from "../src";

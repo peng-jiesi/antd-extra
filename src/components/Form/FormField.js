@@ -35,10 +35,6 @@ export default class FormField extends Component {
      * Form.Item  help
      */
     help: PropTypes.any,
-    /**
-     * Form.Item  rules
-     */
-    rules: PropTypes.array,
 
     /**
      * 在Form.Item 对象布局后提供一个action区
@@ -48,17 +44,24 @@ export default class FormField extends Component {
     /**
      * 是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols = 2  4 的时候使用,  3 会有偏移
      */
-    block: PropTypes.bool
-
+    block: PropTypes.bool,
+    /**
+     * Form.Item  rules
+     */
+    rules: PropTypes.array,
+    /**
+     * getFieldDecorator, options.valuePropName
+     */
+    valuePropName: PropTypes.any
   };
+
 
   static contextTypes = {
     form: PropTypes.any,
   };
 
-
   renderChildren() {
-    const { name, action, children, form, initialValue, label, rules, required } = this.props;
+    const { name, action, children, form, label, required, initialValue, rules, valuePropName } = this.props;
 
     const _form = form || this.context.form;
 
@@ -74,10 +77,17 @@ export default class FormField extends Component {
     }
 
     const fieldName = name;
-    const filed = getFieldDecorator(fieldName, {
+    const fieldOptions = {
       rules: itemRules,
       initialValue,
-    })(children);
+    };
+
+    if (valuePropName) {
+      fieldOptions.valuePropName = valuePropName;
+    }
+
+
+    const filed = getFieldDecorator(fieldName, fieldOptions)(children);
 
     // 如果没有action直接返回
     if (!action) {
