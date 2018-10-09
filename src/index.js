@@ -16,7 +16,8 @@ import FormField from './components/Form/FormField';
 import PageTitle from './layouts/Page/PageTitle';
 import ModalFooter from './components/ModalView/ModalFooter';
 import ModalView from './components/ModalView/ModalView';
+import Card from './components/Card';
 import './index.less';
 
 
-export {DetailView, AttributeLabel, LinkButton, FormLayout, SearchForm, FormField, PageTitle, ModalFooter, ModalView};
+export {DetailView, AttributeLabel, LinkButton, FormLayout, SearchForm, FormField, PageTitle, ModalFooter, ModalView,Card};
