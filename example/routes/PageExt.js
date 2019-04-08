@@ -9,7 +9,6 @@ export default class PageExt extends React.Component {
     return (
       <div style={{ padding: '24px' }}>
         <PageTitle color={'#000000'} actions={<Button>测试</Button>}>这是一个标题</PageTitle>
-
         <DetailView title={'详情展示'} titleSize={'small'}>
           <AttributeLabel label={'测试'}>123123123123</AttributeLabel>
           <AttributeLabel label={'测试'}>123123123123</AttributeLabel>

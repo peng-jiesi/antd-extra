@@ -4,7 +4,7 @@ import {PageTitle, DetailView, AttributeLabel,ModalFooter} from "../../src";
 import {Button} from "antd";
 
 @connect()
-export default class ModalPage extends React.Component {
+export default class ModalForm extends React.Component {
 
 
   render() {
