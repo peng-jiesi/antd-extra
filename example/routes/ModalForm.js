@@ -20,6 +20,63 @@ export default class FormExt extends React.Component {
             <Input/>
           </FormField>
           <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+          <FormField
+            label={"Test Label"}
+            name={"test"}
+            initialValue={data.test}
+            required
+          >
+            <Input/>
+          </FormField>
+
+          <FormField
             label={"Test Label2"}
             name={"test2"}
             initialValue={data.test2}

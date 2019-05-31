@@ -16,6 +16,7 @@ import ModalForm from "./ModalForm";
  * // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
  * // modalConfig 见 antd Modal
  * // modalConfig.place  支持侧边栏模式弹窗, right | left
+ * // modalConfig.noStore  设定为true时, 可以不做bindApp
  * // contentProps  可以直接传递给Component
  * ModalView.open(ModalPage,modalConfig,contentProps)
  *
@@ -68,6 +69,7 @@ import ModalForm from "./ModalForm";
  * //  title,  modal 的title
  * //  contentProps,  传递给FormComponent的属性,  其中主要包括:  data初始数据, 可用props.data访问,   onSubmit提交函数, 可用props.onSubmit访问
  * //  config,  modal 的config,  等同于ModalView的config
+ * //  config.onFooter, 支持 onFooter =  true   则不渲染Footer
  * ```
  *
  * ModalExt.js
@@ -93,12 +95,13 @@ export default class ModalView extends Component {
     ModalView.app = app;
   }
 
-  static open4Form(component, title, contentProps = {}, config = {}) {
-    ModalView.open(ModalForm, { ...config, title }, { ...contentProps, content: component });
-  }
+  // static open4Form(component, title, contentProps = {}, config = {}) {
+  //   ModalView.open(ModalForm, { ...config, title }, { ...contentProps, content: component });
+  // }
 
   static open(content, config = {}, contentProps = {}) {
-    if (!ModalView.app) {
+    const { noStore = false } = config;
+    if (!noStore && !ModalView.app) {
       throw new Error('Please ModalView.bindApp(app); in dva index.js');
     }
 
@@ -120,9 +123,9 @@ export default class ModalView extends Component {
       if (unmountResult && div.parentNode) {
         div.parentNode.removeChild(div);
       }
-      const triggerCancel = args && args.length &&
-        args.some(param => param && param.triggerCancel);
-      if (config.onCancel && triggerCancel) {
+      // const triggerCancel = args && args.length &&
+      //   args.some(param => param && param.triggerCancel);
+      if (config.onCancel) {
         config.onCancel(...args);
       }
     }
@@ -131,12 +134,15 @@ export default class ModalView extends Component {
       ReactDOM.render(<ModalView {...props} />, div);
     }
 
-    const contenInst = createElement(content, {
+    const instProps = {
       ...contentProps,
-      store: ModalView.app._store,
       modalRef: { close: onCancel }
-    })
+    };
+    if (!noStore) {
+      instProps.store = ModalView.app._store
+    }
 
+    const contentInst = createElement(content, instProps);
 
     const defultConfig = {
       width: '860px',
@@ -152,7 +158,7 @@ export default class ModalView extends Component {
     const modelProps = {
       ...defultConfig,
       ...config,
-      content: contenInst,
+      content: contentInst,
       footer: null,
       visible: true,
       onCancel

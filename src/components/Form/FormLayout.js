@@ -94,6 +94,8 @@ export default class FormLayout extends React.PureComponent {
       if (inner.props.labelCol) {
         ele = inner;
       } else {
+
+        //todo 强制指定样式, 计算宽度
         const labelSpan = Math.ceil(24 / cols / 3);
         ele = React.cloneElement(inner, {
           labelCol: { span: labelSpan },

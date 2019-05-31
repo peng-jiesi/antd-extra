@@ -20,6 +20,7 @@ import ModalView from './ModalView'
  * //  title,  modal 的title
  * //  contentProps,  传递给FormComponent的属性,  其中主要包括:  data初始数据, 可用props.data访问,   onSubmit提交函数, 可用props.onSubmit访问
  * //  config,  modal 的config,  等同于ModalView的config
+ * //  config.onFooter, 支持 onFooter =  true   则不渲染Footer
  * ```
  *
  * ModalExt.js
@@ -39,7 +40,14 @@ import ModalView from './ModalView'
 
 export default class ModalUtils {
   static openFormModal(component, title, contentProps = {}, config = {}) {
-    ModalView.open(ModalForm, { width: '600px', ...config, title }, { ...contentProps, content: component });
+    const { noFooter = false } = config;
+    ModalView.open(ModalForm,
+      { width: '600px', ...config, title },
+      {
+        ...contentProps,
+        content: component,
+        noFooter
+      });
   }
 
   static openModal(content, config = {}, contentProps = {}) {

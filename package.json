@@ -1,6 +1,6 @@
 {
   "name": "antd-extra",
-  "version": "0.2.4",
+  "version": "0.2.9",
   "author": "peng.jiesi@qq.com",
   "description": "React component, base on antd",
   "license": "MIT",
@@ -15,7 +15,8 @@
     "dts": "react2dts --name antd-extra --file src/components/Form/SearchForm.js --top-level-module"
   },
   "dependencies": {
-    "antd": "^3.8.4",
+    "antd": "^3.19.1",
+    "dva-model-extend": "^0.1.2",
     "lodash": "^4.17.10"
   },
   "devDependencies": {

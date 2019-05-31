@@ -32,10 +32,14 @@ class SearchForm extends React.PureComponent {
   static propTypes = {
 
     /**
-     * 查询函数   (values,event:{action}) => {}
-     * event.action 触发动作 查询(SEARCH)或者重置(RESET)
+     * 查询函数   (values,event:{action}) => {}, event.action 触发动作 查询(SEARCH)或者重置(RESET)
      */
     onSearch: PropTypes.func.isRequired,
+
+    /**
+     * 点击重置后触发,  会在onSearch之前执行,    重置会触发一次onSearch(空值)
+     */
+    onReset: PropTypes.func,
 
     /**
      * 精简模式下展示多少条件
@@ -121,6 +125,11 @@ class SearchForm extends React.PureComponent {
 
   handleReset() {
     this.form.resetFields();
+
+    if(this.props.onReset){
+      this.onReset();
+    }
+
     this.invokeSearch('RESET');
   }
 

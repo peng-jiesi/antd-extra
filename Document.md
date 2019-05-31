@@ -1,6 +1,19 @@
 Components
 ----------
 
+**src\components\Button\DividerGroup.js**
+
+### 1. DividerGroup
+
+Table中的Button
+```html
+<LinkButton onClick={}>删除</LinkButton>
+```   
+
+
+
+
+-----
 **src\components\Button\LinkButton.js**
 
 ### 1. LinkButton
@@ -110,8 +123,8 @@ gutter|number|no|8|Row  gutter
 
 Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-onSearch|func|yes||查询函数   (values,event:{action}) &#x3D;&gt; {}
-event.action 触发动作 查询(SEARCH)或者重置(RESET)
+onSearch|func|yes||查询函数   (values,event:{action}) &#x3D;&gt; {}, event.action 触发动作 查询(SEARCH)或者重置(RESET)
+onReset|func|no||点击重置后触发,  会在onSearch之前执行,    重置会触发一次onSearch(空值)
 min|number|no|999|精简模式下展示多少条件
 queryText|string|no|&lt;See the source code&gt;|查询按钮文字
 resetText|string|no|&lt;See the source code&gt;|重置按钮文字
@@ -147,7 +160,7 @@ style|any|no||style
 -----
 **src\components\ModalView\ModalForm.js**
 
-### 1. ModalForm
+### 1. ModalFormWarp
 
 
 
@@ -167,6 +180,7 @@ ModalView.bindApp(app);
 // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
 // modalConfig 见 antd Modal
 // modalConfig.place  支持侧边栏模式弹窗, right | left
+// modalConfig.noStore  设定为true时, 可以不做bindApp
 // contentProps  可以直接传递给Component
 ModalView.open(ModalPage,modalConfig,contentProps)
 
@@ -219,6 +233,7 @@ ModalUtils.openFormModal(FormComponent, title, contentProps, config)
 //  title,  modal 的title
 //  contentProps,  传递给FormComponent的属性,  其中主要包括:  data初始数据, 可用props.data访问,   onSubmit提交函数, 可用props.onSubmit访问
 //  config,  modal 的config,  等同于ModalView的config
+//  config.onFooter, 支持 onFooter =  true   则不渲染Footer
 ```
 
 ModalExt.js

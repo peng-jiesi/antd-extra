@@ -15,15 +15,28 @@ class ModalFormWarp extends Component {
     this.props.modalRef.close();
   };
 
+  renderFooter() {
+    if (this.props.noFooter) {
+      return null;
+    } else {
+      return (
+        <ModalFooter>
+          <Button type="primary" onClick={this.onOk}>确定</Button>
+          <Button type="primary" onClick={this.onCancel}>取消</Button>
+        </ModalFooter>
+      )
+    }
+
+  }
+
+
+  //todo 只传递部分参数
   render() {
     const { content } = this.props;
     return (
       <Fragment>
         {createElement(content, { ...this.props })}
-        <ModalFooter>
-          <Button type="primary" onClick={this.onOk}>确定</Button>
-          <Button type="primary" onClick={this.onCancel}>取消</Button>
-        </ModalFooter>
+        {this.renderFooter()}
       </Fragment>
     );
   }
