@@ -6,6 +6,7 @@
 'use strict';
 import DetailView from "./components/View/DetailView";
 import AttributeLabel from "./components/View/AttributeLabel";
+import TableResponsive from "./components/View/TableResponsive";
 
 import LinkButton from './components/Button/LinkButton';
 // import DividerGroup from './components/Button/DividerGroup';
@@ -28,6 +29,7 @@ import './index.less';
 export {
   DetailView,
   AttributeLabel,
+  TableResponsive,
 
   LinkButton,
 

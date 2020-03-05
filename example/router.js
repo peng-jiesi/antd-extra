@@ -4,6 +4,7 @@ import IndexPage from './routes/IndexPage';
 import FormExt from "./routes/FormExt";
 import PageExt from "./routes/PageExt";
 import ModalExt from "./routes/ModalExt";
+import TableExt from "./routes/TableExt";
 
 function RouterConfig({ history }) {
   return (
@@ -13,6 +14,7 @@ function RouterConfig({ history }) {
         <Route path="/form-ext" exact component={FormExt} />
         <Route path="/page-ext" exact component={PageExt} />
         <Route path="/modal-ext" exact component={ModalExt} />
+        <Route path="/table-ext" exact component={TableExt} />
       </Switch>
     </Router>
   );
