@@ -1,9 +1,8 @@
-import React, {Fragment} from 'react';
-import {connect} from 'dva';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Button, Input } from 'antd';
-import {FormField, FormLayout, SearchForm} from "../../src";
+import React, { Fragment } from "react";
+import { connect } from "dva";
+import { Button, Form, Input } from "antd";
+
+import { FormField, FormLayout, SearchForm } from "../../src";
 
 @Form.create()
 export default class FormExt extends React.Component {
@@ -19,7 +18,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -27,7 +26,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -35,7 +34,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -43,7 +42,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -51,7 +50,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -59,7 +58,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -67,7 +66,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
           <FormField
             label={"Test Label"}
@@ -75,7 +74,7 @@ export default class FormExt extends React.Component {
             initialValue={data.test}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
 
           <FormField
@@ -84,11 +83,10 @@ export default class FormExt extends React.Component {
             initialValue={data.test2}
             required
           >
-            <Input/>
+            <Input />
           </FormField>
         </FormLayout>
       </Form>
-    )
+    );
   }
 }
-

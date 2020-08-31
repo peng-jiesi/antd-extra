@@ -2,9 +2,7 @@
 
 import React, {Fragment} from 'react';
 import {connect} from 'dva';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Button, Input } from 'antd';
+import {Button, Form, Input} from 'antd';
 import {FormField, FormLayout, SearchForm} from "../../src";
 @Form.create()
 @connect()
