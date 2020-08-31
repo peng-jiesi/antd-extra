@@ -7,7 +7,7 @@ import {ModalView} from "../src";
 // 1. Initialize
 const app = dva();
 
-// ModalView.bindApp(app);
+ModalView.bindApp(app);
 // 2. Plugins
 // app.use({});
 

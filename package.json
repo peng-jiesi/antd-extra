@@ -1,6 +1,6 @@
 {
   "name": "antd-extra",
-  "version": "0.2.9",
+  "version": "0.2.12",
   "author": "peng.jiesi@qq.com",
   "description": "React component, base on antd",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "dts": "react2dts --name antd-extra --file src/components/Form/SearchForm.js --top-level-module"
   },
   "dependencies": {
-    "antd": "^3.19.1",
+    "antd": "^4.6.1",
     "dva-model-extend": "^0.1.2",
     "lodash": "^4.17.10"
   },
@@ -44,7 +44,9 @@
     "react-dom": "^16.4.2",
     "react-to-typescript-definitions": "^1.0.0",
     "redbox-react": "^1.6.0",
-    "roadhog": "^2.4.5"
+    "roadhog": "^2.4.5",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.0"
   },
   "repository": "https://github.com/peng-jiesi/antd-extra.git"
 }

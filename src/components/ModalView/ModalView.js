@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom';
 import React, {Component, createElement} from 'react';
-import {Modal} from 'antd';
+import {Modal, Drawer} from 'antd';
 import 'antd/lib/modal/style/css';
 import ModalForm from "./ModalForm";
 
@@ -15,7 +15,8 @@ import ModalForm from "./ModalForm";
  *
  * // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
  * // modalConfig 见 antd Modal
- * // modalConfig.place  支持侧边栏模式弹窗, right | left
+ * // modalConfig.placement  支持侧边栏模式弹窗, right | left,   启用该模式默认使用 Drawer
+ * // modalConfig.type      支持 Modal 和 Drawer
  * // modalConfig.noStore  设定为true时, 可以不做bindApp
  * // contentProps  可以直接传递给Component
  * ModalView.open(ModalPage,modalConfig,contentProps)
@@ -149,9 +150,16 @@ export default class ModalView extends Component {
       title: 'Modal'
     };
 
-    const { place, noHover } = config;
+    const { placement, noHover, type='Modal' } = config;
 
-    if (place === 'right' || place === 'left') {
+    let realType = type;
+
+    // 当指定placement时, 默认使用Drawer
+    if(placement){
+      realType = 'Drawer'
+    }
+
+    if(realType === 'Drawer') {
       defultConfig.width = '380px';
     }
 
@@ -161,13 +169,14 @@ export default class ModalView extends Component {
       content: contentInst,
       footer: null,
       visible: true,
+      type: realType,
       onCancel
     };
 
 
-    if (place && noHover) {
-      modelProps.wrapClassName = modelProps.wrapClassName ? `no-hover ${place} ${modelProps.wrapClassName}` : `no-hover ${place}`
-    }
+    // if (place && noHover) {
+    //   modelProps.wrapClassName = modelProps.wrapClassName ? `no-hover ${modelProps.wrapClassName}` : `no-hover`
+    // }
 
     // const contenInst = <ModelComponent store={ModalView.app._store} modalRef={{ close: onCancel }} />;
     render(modelProps);
@@ -180,9 +189,12 @@ export default class ModalView extends Component {
 
   // todo 国际化问题需要处理
   render() {
-    const { place } = this.props;
-    return (
-      <Modal className={`antd-x-content-modal ${place}`} {...this.props} >{this.props.content}</Modal>
-    );
+    const { type } = this.props;
+    console.log(this.props);
+    if(type ==='Drawer'){
+      return (<Drawer className={`antd-x-content-modal`} {...this.props} onClose={this.props.onCancel} >{this.props.content}</Drawer>);
+    }else{
+      return (<Modal className={`antd-x-content-modal`} {...this.props} >{this.props.content}</Modal>);
+    }
   }
 }

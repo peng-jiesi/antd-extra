@@ -25,6 +25,7 @@ class SearchForm extends React.PureComponent {
     queryText: '查询',
     resetText: '清除',
     expandText: '更多条件',
+    collapseText: '简化条件',
     compact: true,
     cols: 3
   };
@@ -60,6 +61,11 @@ class SearchForm extends React.PureComponent {
      * 展开按钮文字
      */
     expandText: PropTypes.string,
+
+    /**
+     * 收缩按钮文字
+     */
+    collapseText: PropTypes.string,
 
     /**
      * 布局展示几行  FormLayout cols
@@ -126,8 +132,9 @@ class SearchForm extends React.PureComponent {
   handleReset() {
     this.form.resetFields();
 
-    if(this.props.onReset){
-      this.onReset();
+    const { onReset } = this.props;
+    if (isFunction(onReset)) {
+      onReset();
     }
 
     this.invokeSearch('RESET');
@@ -161,11 +168,14 @@ class SearchForm extends React.PureComponent {
   }
 
   renderExtend(expand) {
-    const { children, extendText, min, expandText } = this.props;
+    const { children, extendText, min, expandText, collapseText } = this.props;
+
+    const text = expand ? collapseText : (extendText || expandText)
+
     if (children.length > min) {
       return (
         <a style={{ marginRight: 12, fontSize: 12 }} onClick={this.toggle.bind(this)}>
-          {extendText || expandText} <Icon type={expand ? 'up' : 'down'}/>
+          {text} <Icon type={expand ? 'up' : 'down'}/>
         </a>
       );
     }

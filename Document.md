@@ -129,6 +129,7 @@ min|number|no|999|精简模式下展示多少条件
 queryText|string|no|&lt;See the source code&gt;|查询按钮文字
 resetText|string|no|&lt;See the source code&gt;|重置按钮文字
 expandText|string|no|&lt;See the source code&gt;|展开按钮文字
+collapseText|string|no|&lt;See the source code&gt;|收缩按钮文字
 cols|number|no|3|布局展示几行  FormLayout cols
 compact|bool|no|true|是否紧缩布局   FormLayout compact
 gutter|number|no||FormLayout gutter
@@ -179,7 +180,8 @@ ModalView.bindApp(app);
 
 // 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
 // modalConfig 见 antd Modal
-// modalConfig.place  支持侧边栏模式弹窗, right | left
+// modalConfig.placement  支持侧边栏模式弹窗, right | left,   启用该模式默认使用 Drawer
+// modalConfig.type      支持 Modal 和 Drawer
 // modalConfig.noStore  设定为true时, 可以不做bindApp
 // contentProps  可以直接传递给Component
 ModalView.open(ModalPage,modalConfig,contentProps)
@@ -297,6 +299,14 @@ gutter|number|no|8|Row gutter 见:PageTitle  gutter
 color|string|no||标题头的颜色 见:PageTitle color
 actions|any|no||标题操作 见:PageTitle actions
 titleSize|string|no||标题大小, 见: PageTitle size
+-----
+**src\components\View\TableResponsive.js**
+
+### 1. TableResponsive
+
+
+
+
 -----
 **src\layouts\Page\PageLayout.js**
 
