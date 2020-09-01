@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 /**
  * DetailView 下的元素
  */
 export default class AttributeLabel extends PureComponent {
   static defaultProps = {
-    size: 1
+    size: 1,
   };
 
   static propTypes = {
@@ -23,15 +23,18 @@ export default class AttributeLabel extends PureComponent {
     /**
      * size 在DetailView下占据几行
      */
-    size: PropTypes.number
+    size: PropTypes.number,
   };
 
   render() {
     const { title, children, label, size } = this.props;
     const width = 100 / 3 / size;
     return (
-      <div className='attribute' title={title}>
-        <span className='label' style={{width:`${width}%`}}>{label}</span> {children}
+      <div className="attribute" title={title}>
+        <span className="label" style={{ width: `${width}%` }}>
+          {label}
+        </span>{" "}
+        {children}
       </div>
     );
   }

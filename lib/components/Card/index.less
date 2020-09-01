@@ -1,0 +1,131 @@
+
+@link-color: #1890ff;                            // 链接色
+@success-color: #31b968;     //green                    // 成功色
+@warning-color: #faad14;   //orange                      // 警告色
+@error-color: #f5222d;
+
+.card{
+  margin:10px;
+  position: relative;
+  width: 200px;
+  height: 122px;
+  border: 1px solid #e8e8e8;
+  font-size: 12px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  border-radius: 2px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.customCard1{
+
+  padding: 10px;
+  background-size: cover;
+
+}
+
+.customLogo {
+  float: left;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.icon{
+  font-size: 18px;
+  color:#ffffff;
+}
+.title{
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bolder;
+  margin-top: -4px;
+}
+
+
+.desc{
+  font-size: 12px;
+  overflow: hidden;
+  color: rgba(0,0,0,0.45);
+
+}
+.superScript{
+  position: absolute;
+  top: 0;
+  right:0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.3);              background: #fff;
+  p{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    span{
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 48px solid @success-color;
+      border-left: 48px solid transparent;
+    }
+    em{
+      position: absolute;
+      transform: rotate(45deg);
+      top: 12%;
+      right: 8%;
+      z-index: 1;
+      color: #fff;
+      font-style: normal;
+    }
+  }
+
+}
+
+.state{
+  margin-left: 3px;
+}
+
+
+.antCardActions{
+  font-size: 12px;
+  display: flex;
+  border-top: 1px solid #e8e8e8;
+  background: #fafafa;
+  zoom: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li:not(:last-child) {
+    border-right: 1px solid #e8e8e8;
+  }
+  li{
+    flex: 1;
+    text-align: center;
+    margin: 3px 0;
+    color: rgba(0, 0, 0, 0.45);
+    span{
+      display: inline-block;
+      font-size: 12px;
+      cursor: pointer;
+      min-width: 32px;
+      position: relative;
+    }
+    span:hover{
+      color: @link-color;
+    }
+  }
+}
+

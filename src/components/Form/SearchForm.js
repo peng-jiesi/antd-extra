@@ -2,12 +2,18 @@
  * SearchForm
  * Created by pengj on 2018-4-29.
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Button, Col, Form, Icon} from 'antd';
-import isFunction from 'lodash/isFunction';
-import isArray from 'lodash/isArray';
-import FormLayout from './FormLayout';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button, Col, Form, Icon } from "antd";
+import isFunction from "lodash/isFunction";
+import isArray from "lodash/isArray";
+import {
+  UpSquareOutlined,
+  DownSquareOutlined,
+  SearchOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
+import FormLayout from "./FormLayout";
 
 /**
  * 自动布局查询表单,  可以通过min调整, 提供高级搜索能力
@@ -18,20 +24,18 @@ import FormLayout from './FormLayout';
  * </SearchForm>
  * ```
  */
-class SearchForm extends React.PureComponent {
-
+export default class SearchForm extends React.PureComponent {
   static defaultProps = {
     min: 999,
-    queryText: '查询',
-    resetText: '清除',
-    expandText: '更多条件',
-    collapseText: '简化条件',
+    queryText: "查询",
+    resetText: "清除",
+    expandText: "更多条件",
+    collapseText: "简化条件",
     compact: true,
-    cols: 3
+    cols: 3,
   };
 
   static propTypes = {
-
     /**
      * 查询函数   (values,event:{action}) => {}, event.action 触发动作 查询(SEARCH)或者重置(RESET)
      */
@@ -83,11 +87,6 @@ class SearchForm extends React.PureComponent {
     gutter: PropTypes.number,
 
     /**
-     * Form.create()包装后的 props.form
-     */
-    form: PropTypes.any.isRequired,
-
-    /**
      * 放置在查询按钮后的 扩展按钮
      */
     actions: PropTypes.any,
@@ -95,21 +94,16 @@ class SearchForm extends React.PureComponent {
     /**
      * style
      */
-    style: PropTypes.any
-
+    style: PropTypes.any,
   };
-
-  static contextTypes = {
-    form: PropTypes.any,
-  };
-
 
   constructor(props, context) {
     super(props, context);
-    this.form = this.props.form || this.context.form;
-    if (!this.form) {
-      console.warn('must assign [form] in context or props');
-    }
+    this.formRef = React.createRef();
+
+    // if (!this.form) {
+    //   console.warn("props.form must be return from  Form.useForm");
+    // }
 
     this.state = {
       expand: false,
@@ -118,33 +112,37 @@ class SearchForm extends React.PureComponent {
 
   invokeSearch(action) {
     const { onSearch } = this.props;
+
     if (!isFunction(onSearch)) {
-      console.warn('onSearch must be function');
+      console.warn("onSearch must be function");
     } else {
-      onSearch(this.form.getFieldsValue(), { action });
+      onSearch(this.formRef.current.getFieldsValue(), { action });
     }
   }
 
   handleSearch() {
-    this.invokeSearch('SEARCH');
+    this.invokeSearch("SEARCH");
   }
 
   handleReset() {
-    this.form.resetFields();
+    this.formRef.current.resetFields();
 
     const { onReset } = this.props;
     if (isFunction(onReset)) {
       onReset();
     }
 
-    this.invokeSearch('RESET');
+    this.invokeSearch("RESET");
   }
 
   toggle() {
-    const { state: { expand }, form } = this;
+    const {
+      state: { expand },
+    } = this;
+
     const nextExpand = !expand;
     if (!nextExpand) {
-      form.resetFields();
+      this.formRef.current.resetFields();
     }
 
     this.setState({ expand: nextExpand });
@@ -170,12 +168,17 @@ class SearchForm extends React.PureComponent {
   renderExtend(expand) {
     const { children, extendText, min, expandText, collapseText } = this.props;
 
-    const text = expand ? collapseText : (extendText || expandText)
+    const text = expand ? collapseText : extendText || expandText;
 
     if (children.length > min) {
+      const icon = expand ? <UpSquareOutlined /> : <DownSquareOutlined />;
+
       return (
-        <a style={{ marginRight: 12, fontSize: 12 }} onClick={this.toggle.bind(this)}>
-          {text} <Icon type={expand ? 'up' : 'down'}/>
+        <a
+          style={{ marginRight: 12, fontSize: 12 }}
+          onClick={this.toggle.bind(this)}
+        >
+          {text} {icon}
         </a>
       );
     }
@@ -183,15 +186,35 @@ class SearchForm extends React.PureComponent {
 
   render() {
     const { expand } = this.state;
-    const { queryText, resetText, cols, compact, gutter, actions, style } = this.props;
+    const {
+      queryText,
+      resetText,
+      cols,
+      compact,
+      gutter,
+      actions,
+      style,
+    } = this.props;
+
     return (
-      <Form className='antd-x-search-form' style={style}>
-        <FormLayout form={this.form} cols={cols} compact={compact} gutter={gutter}>
+      <Form className="antd-x-search-form" style={style} ref={this.formRef}>
+        <FormLayout cols={cols} compact={compact} gutter={gutter}>
           {this.renderItems()}
-          <Col className='actions' nowarp={true}>
+          <Col className="actions" nowarp={true}>
             {this.renderExtend(expand)}
-            <Button type='primary' icon="search" onClick={this.handleSearch.bind(this)}>{queryText}</Button>
-            <Button icon="reload" onClick={this.handleReset.bind(this)}>{resetText}</Button>
+            <Button
+              type="primary"
+              icon={<SearchOutlined />}
+              onClick={this.handleSearch.bind(this)}
+            >
+              {queryText}
+            </Button>
+            <Button
+              icon={<ReloadOutlined />}
+              onClick={this.handleReset.bind(this)}
+            >
+              {resetText}
+            </Button>
             {actions}
           </Col>
         </FormLayout>
@@ -199,5 +222,3 @@ class SearchForm extends React.PureComponent {
     );
   }
 }
-
-export default SearchForm;

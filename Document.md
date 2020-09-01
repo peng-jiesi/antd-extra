@@ -46,14 +46,13 @@ Table中的Button
 
 Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-form|any|no||Form.create()包装后的 props.form,  如果包裹在FormLayout 或者提供 context.form组件下, 可以不传
 required|any|no||是否必填, 默认提示为 ${label}必须填写
 label|any|no||Form.Item  label
 help|any|no||Form.Item  help
-action|element|no||在Form.Item 对象布局后提供一个action区
-block|bool|no||是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols &#x3D; 2  4 的时候使用,  3 会有偏移
 rules|array|no||Form.Item  rules
 valuePropName|any|no||getFieldDecorator, options.valuePropName
+action|element|no||在Form.Item 对象布局后提供一个action区
+block|bool|no||是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols &#x3D; 2  4 的时候使用,  3 会有偏移
 -----
 **src\components\Form\FormLayout.js**
 
@@ -63,7 +62,7 @@ valuePropName|any|no||getFieldDecorator, options.valuePropName
 
 直接放入FormField
 ```html
-<FormLayout form={form} compact={true} cols={4}>
+<FormLayout compact={true} cols={4}>
   <FormField
   label={"Test Label1111111111111"}
   name={"test"}
@@ -76,14 +75,14 @@ valuePropName|any|no||getFieldDecorator, options.valuePropName
 
 放入Fragment包裹的元素, 会被展开
 ```html
-<FormLayout form={form} compact={true} cols={4}>
+<FormLayout compact={true} cols={4}>
    <Fragment></Fragment>
 </FormLayout>
 ```
 
 下级元素存在block属性时, 会展开为单行, 建议用cols=2 | 4 的时候使用
 ```html
-<FormLayout form={form} compact={true} cols={4}>
+<FormLayout compact={true} cols={4}>
   <FormField block label={"Test Label11111111111"} name={"test"} required>
     <Input/>
   </FormField>
@@ -101,7 +100,6 @@ valuePropName|any|no||getFieldDecorator, options.valuePropName
 
 Property | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-form|any|yes||Form.create()包装后的 props.form
 cols|number|no|1|布局展示几行
 compact|bool|no|false|是否紧缩布局
 gutter|number|no|8|Row  gutter
@@ -133,122 +131,61 @@ collapseText|string|no|&lt;See the source code&gt;|收缩按钮文字
 cols|number|no|3|布局展示几行  FormLayout cols
 compact|bool|no|true|是否紧缩布局   FormLayout compact
 gutter|number|no||FormLayout gutter
-form|any|yes||Form.create()包装后的 props.form
 actions|any|no||放置在查询按钮后的 扩展按钮
 style|any|no||style
 -----
-**src\components\ModalView\ModalFooter.js**
+**src\components\ModalView\ModalOpener.js**
 
-### 1. ModalFooter
+### 1. ModalOpener
 
-包裹在ModalView下的footer
-
+弹窗按钮包装
 ```html
-<ModalFooter>
-  <Button
-    onClick={() => {
-      this.props.modalRef.close();
-    }}
-  >
-    Close
-  </Button>
-</ModalFooter>
-```   
-
-
-
-
------
-**src\components\ModalView\ModalForm.js**
-
-### 1. ModalFormWarp
-
-
-
-
------
-**src\components\ModalView\ModalView.js**
-
-### 1. ModalView
-
-提供全局弹窗, 弹窗内Component可以直接使用connect
-
-```js
-// 使用时首先在  dva index.js 中绑定
-ModalView.bindApp(app);
-
-
-// 在model 或者 Component中直接打开弹窗, 弹窗内容为Component实例
-// modalConfig 见 antd Modal
-// modalConfig.placement  支持侧边栏模式弹窗, right | left,   启用该模式默认使用 Drawer
-// modalConfig.type      支持 Modal 和 Drawer
-// modalConfig.noStore  设定为true时, 可以不做bindApp
-// contentProps  可以直接传递给Component
-ModalView.open(ModalPage,modalConfig,contentProps)
-
-
-
-// ModalPage中可以通过 props.modalRef.close() 关闭弹窗
-```
-
-ModalPage.js
-```js
- * @connect()
-export default class ModalPage extends React.Component {
-
-  render() {
-    return (
-      <Fragment>
-        <DetailView title={'详情展示'}>
-          <AttributeLabel label={'测试'}>123123123123</AttributeLabel>
-        </DetailView>
-
-        <ModalFooter>
-          <Button
-            onClick={() => {
-              this.props.modalRef.close();
-            }}
-          >
-            Close
-          </Button>
-        </ModalFooter>
-      </Fragment>
-    )
-  }
-}
-```
-
-ModalUtils 提供弹窗入口类
-
-```js
-// 使用时首先在  dva index.js 中绑定,   注意是ModalView
-ModalView.bindApp(app);
-
-
-// 等于原有的ModalView.open
-ModalUtils.openModal(ModalPage,modalConfig,contentProps)
-
-
-// 用于表单编辑类弹窗, 自带form对象和数据传递
-ModalUtils.openFormModal(FormComponent, title, contentProps, config)
-//  FormComponent,  标准的form对象  <Form><FormLayout></FormLayout></Form>
-//  title,  modal 的title
-//  contentProps,  传递给FormComponent的属性,  其中主要包括:  data初始数据, 可用props.data访问,   onSubmit提交函数, 可用props.onSubmit访问
-//  config,  modal 的config,  等同于ModalView的config
-//  config.onFooter, 支持 onFooter =  true   则不渲染Footer
-```
-
-ModalExt.js
-```js
- <Button  onClick={() => {
-            ModalView.open4Form(ModalForm, '测试', {
-              onSubmit: (data, onClose, { initData, form }) => {console.log(data), console.log(onClose);},
-              data: { test: 'test1', test2: 'test2' }
-            })
+        <ModalOpener
+          content={ModalPage}
+          title="ModalPage"
+          custProps={{
+            a: 1,
+            b: 2,
           }}
- >
- Open Form
- </Button>
+        >
+          <Button>Open Component</Button>
+        </ModalOpener>
+```
+content:   弹窗内的组件,   ReactComponent
+custProps:   传入  content实例的props
+onOk:  提交事件,   如果不关联form 为 (event)=>{},  关联form为  (data,modalCloseFun, {initData,form, e })
+onOpen:  打开弹窗前调用 ()=>{}
+onCancel: 取消事件,   (event)=>{}
+
+与Form组件联动
+如下列例子中,  ModalForm 为带Form的组件
+```html
+        <ModalOpener
+          content={ModalForm}
+          title="ModalPage"
+          custProps={{
+            a: 1,
+            b: 2,
+          }}
+        >
+          <Button>Open Component</Button>
+        </ModalOpener>
+```
+需要在ModalForm中, 通过ref={props.forwardedRef} 关联Form组件, 组件将自动校验form, 直接传递form值到回调onOk
+如下,  
+```html
+      <Form ref={forwardedRef}>
+        <FormLayout>
+          <FormField
+            label={"Test Label"}
+            name={"test1"}
+            initialValue={data.test}
+            required
+          >
+            <Input />
+          </FormField>
+        </FormLayout>
+      </Form>
 ```   
 
 
@@ -334,3 +271,5 @@ color|string|no||竖条颜色
 actions|any|no||操作区域
 size|string|no|&lt;See the source code&gt;|尺寸  可用 small
 -----
+
+<sub>This document was generated by the <a href="https://github.com/marborkowski/react-doc-generator" target="_blank">**React DOC Generator v1.2.5**</a>.</sub>
