@@ -19,40 +19,6 @@ const DefaultModelFormLayout = {
 export default class FormField extends Component {
   static defaultProps = {};
 
-  static propTypes = {
-    /**
-     * 是否必填, 默认提示为 ${label}必须填写
-     */
-    required: PropTypes.any,
-    /**
-     *  Form.Item  label
-     */
-    label: PropTypes.any,
-    /**
-     * Form.Item  help
-     */
-    help: PropTypes.any,
-
-    /**
-     * Form.Item  rules
-     */
-    rules: PropTypes.array,
-    /**
-     * getFieldDecorator, options.valuePropName
-     */
-    valuePropName: PropTypes.any,
-
-    /**
-     * 在Form.Item 对象布局后提供一个action区
-     */
-    action: PropTypes.element,
-
-    /**
-     * 是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols = 2  4 的时候使用,  3 会有偏移
-     */
-    block: PropTypes.bool,
-  };
-
   renderChildren() {
     const { action, children } = this.props;
 
@@ -91,3 +57,37 @@ export default class FormField extends Component {
     return <Form.Item {...props}>{this.renderChildren()}</Form.Item>;
   }
 }
+
+FormField.propTypes = {
+  /**
+   * 是否必填, 默认提示为 ${label}必须填写
+   */
+  required: PropTypes.any,
+  /**
+   *  Form.Item  label
+   */
+  label: PropTypes.any,
+  /**
+   * Form.Item  help
+   */
+  help: PropTypes.any,
+
+  /**
+   * Form.Item  rules
+   */
+  rules: PropTypes.array,
+  /**
+   * getFieldDecorator, options.valuePropName
+   */
+  valuePropName: PropTypes.any,
+
+  /**
+   * 在Form.Item 对象布局后提供一个action区
+   */
+  action: PropTypes.element,
+
+  /**
+   * 是否占整行,  必须在FormLayout下面才有用,  建议在FormLayout.cols = 2  4 的时候使用,  3 会有偏移
+   */
+  block: PropTypes.bool,
+};

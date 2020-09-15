@@ -32,17 +32,17 @@ import _ from "lodash";
  *
  * 下级元素存在block属性时, 会展开为单行, 建议用cols=2 | 4 的时候使用
  *```html
- * <FormLayout compact={true} cols={4}>
- *   <FormField block label={"Test Label11111111111"} name={"test"} required>
- *     <Input/>
- *   </FormField>
- *   <FormField label={"Test Label22222222222"} name={"test2"} required>
- *     <Input/>
- *   </FormField>
- *   <FormField label={"Test Label22222222222"} name={"test2"} required>
- *     <Input/>
- *   </FormField>
- * </FormLayout>
+   <FormLayout compact={true} cols={4}>
+     <FormField block label={"Test Label11111111111"} name={"test"} required>
+       <Input/>
+     </FormField>
+     <FormField label={"Test Label22222222222"} name={"test2"} required>
+       <Input/>
+     </FormField>
+     <FormField label={"Test Label22222222222"} name={"test2"} required>
+       <Input/>
+     </FormField>
+   </FormLayout>
  * ```
  */
 export default class FormLayout extends React.PureComponent {
@@ -50,23 +50,6 @@ export default class FormLayout extends React.PureComponent {
     cols: 1,
     compact: false,
     gutter: 8,
-  };
-
-  static propTypes = {
-    /**
-     * 布局展示几行
-     */
-    cols: PropTypes.number,
-
-    /**
-     * 是否紧缩布局
-     */
-    compact: PropTypes.bool,
-
-    /**
-     * Row  gutter
-     */
-    gutter: PropTypes.number,
   };
 
   renderChildren(inner, key) {
@@ -135,12 +118,9 @@ export default class FormLayout extends React.PureComponent {
     const className = compact
       ? "antd-x-compact-form antd-x-form"
       : "antd-x-form";
-    let items;
-    if (cols === 1) {
-      items = children;
-    } else {
-      items = this.warpItems();
-    }
+    // let items;
+
+    const items = this.warpItems();
 
     return (
       <div className={className}>
@@ -149,3 +129,20 @@ export default class FormLayout extends React.PureComponent {
     );
   }
 }
+
+FormLayout.propTypes = {
+  /**
+   * 布局展示几行
+   */
+  cols: PropTypes.number,
+
+  /**
+   * 是否紧缩布局
+   */
+  compact: PropTypes.bool,
+
+  /**
+   * Row  gutter
+   */
+  gutter: PropTypes.number,
+};

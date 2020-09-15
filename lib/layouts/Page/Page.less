@@ -1,15 +1,25 @@
-@import '~antd/lib/style/themes/default.less';
+@import "~antd/lib/style/themes/default.less";
 
 .antd-x-page-title {
   border-left: @primary-color 5px solid;
   padding-left: @padding-xs;
   margin-bottom: 12px;
+  position: relative;
+
+  .status {
+    background-color: rgb(135, 208, 104);
+    margin-left: 8px;
+    position: absolute;
+    bottom: 4px;
+    font-size: 10px;
+    line-height: 16px;
+  }
 
   .actions {
     float: right;
   }
 
-  &.small{
+  &.small {
     font-size: 16px;
   }
 }

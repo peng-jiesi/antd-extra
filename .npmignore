@@ -1,5 +1,6 @@
 mock
 public
 .umi
-example_umi/.umi
+.storybook
+story-book
 
